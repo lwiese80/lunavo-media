@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lunavo Media — 360° Matterport Touren in Kiel</title>
+<link rel="icon" type="image/png" href="logo.png">
+<meta name="description" content="Professionelle 3D-Touren für Immobilien in Kiel. Virtuelle Besichtigungen die überzeugen. Lunavo Media — Luca Wiese.">
+<meta name="keywords" content="360 Tour Kiel, Matterport Kiel, Virtuelle Besichtigung Kiel, 3D Tour Immobilien, 360° Virtual Tour, Immobilien Tour Kiel, Lunavo Media">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lunavo Media — 360° Matterport Tours">
+<meta property="og:description" content="Professionelle 3D-Touren für Immobilien in Kiel. Virtuelle Besichtigungen die überzeugen.">
+<meta property="og:image" content="profil.jpg">
+<meta property="og:url" content="https://lunavo-media.com">
+<meta property="og:site_name" content="Lunavo Media">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lunavo Media — 360° Matterport Tours">
+<meta name="twitter:description" content="Professionelle 3D-Touren für Immobilien in Kiel. Virtuelle Besichtigungen die überzeugen.">
+<meta name="twitter:image" content="profil.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+--navy:#1B2A4A;--navy-light:#243556;--navy-dark:#111D33;
+--gold:#C9A84C;--gold-light:#D4B96A;
+--white:#FFFFFF;--off-white:#F8F9FB;--gray:#8896A6;--text:#334155;
+--radius:16px;--transition:all .4s cubic-bezier(.4,0,.2,1);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--text);line-height:1.6;background:var(--white);overflow-x:hidden}
+
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+section{padding:120px 0}
+
+/* Animations */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ─── NAV ─── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:24px 0;transition:var(--transition)}
+.nav.scrolled{background:rgba(27,42,74,.97);backdrop-filter:blur(24px);padding:14px 0}
+.nav-inner{display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.nav-logo img{height:32px;width:auto}
+.nav-logo span{font-size:1.1rem;font-weight:600;color:var(--white);letter-spacing:-.3px}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{color:rgba(255,255,255,.6);text-decoration:none;font-size:.85rem;font-weight:400;letter-spacing:.3px;transition:var(--transition)}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{background:var(--gold);color:var(--navy);padding:10px 28px;border-radius:100px;font-weight:600;font-size:.85rem;text-decoration:none;transition:var(--transition);letter-spacing:.2px}
+.nav-cta:hover{background:var(--gold-light);transform:translateY(-1px)}
+.nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer}
+.nav-toggle span{width:22px;height:1.5px;background:var(--white);transition:var(--transition)}
+
+/* ─── HERO ─── */
+.hero{min-height:100vh;display:flex;align-items:center;background:var(--navy);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-40%;right:-20%;width:70%;height:180%;background:radial-gradient(ellipse,rgba(201,168,76,.04) 0%,transparent 70%);pointer-events:none}
+.hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.hero-content{position:relative;z-index:2}
+.hero-label{font-size:.75rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:32px;opacity:.8}
+.hero h1{font-size:clamp(2.4rem,4.5vw,3.6rem);font-weight:300;color:var(--white);line-height:1.15;margin-bottom:24px;letter-spacing:-.5px}
+.hero h1 strong{font-weight:700}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero p{font-size:1.05rem;color:rgba(255,255,255,.45);line-height:1.8;margin-bottom:48px;max-width:440px;font-weight:300}
+.hero-buttons{display:flex;gap:16px;align-items:center}
+.btn-gold{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:var(--navy);padding:16px 36px;border-radius:100px;font-weight:600;font-size:.9rem;text-decoration:none;transition:var(--transition);border:none;cursor:pointer;letter-spacing:.3px}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 12px 40px rgba(201,168,76,.25)}
+.btn-ghost{color:rgba(255,255,255,.5);text-decoration:none;font-size:.85rem;font-weight:400;transition:var(--transition);padding:16px 24px}
+.btn-ghost:hover{color:var(--gold)}
+.hero-visual{position:relative;z-index:2}
+.hero-frame{border-radius:var(--radius);overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,.3)}
+.hero-frame iframe{width:100%;aspect-ratio:4/3;border:none;display:block}
+
+/* ─── STATS BAR ─── */
+.stats-bar{background:var(--off-white);padding:60px 0;border-bottom:1px solid rgba(0,0,0,.04)}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;text-align:center}
+.stat-number{font-size:2.8rem;font-weight:700;color:var(--navy);letter-spacing:-1px}
+.stat-label{font-size:.85rem;color:var(--gray);margin-top:4px;font-weight:400;letter-spacing:.5px}
+
+/* ─── TOUREN ─── */
+.touren{background:var(--white)}
+.touren-header{text-align:center;margin-bottom:64px}
+.touren-header h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;color:var(--navy);letter-spacing:-.3px}
+.touren-header p{font-size:1rem;color:var(--gray);margin-top:12px;font-weight:300}
+.touren-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.tour-card{border-radius:var(--radius);overflow:hidden;background:var(--off-white);transition:var(--transition)}
+.tour-card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(27,42,74,.1)}
+.tour-card iframe{width:100%;aspect-ratio:16/10;border:none;display:block}
+
+/* ─── LEISTUNGEN ─── */
+.leistungen{background:var(--off-white)}
+.leistungen-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.leistungen-content h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;color:var(--navy);margin-bottom:16px;letter-spacing:-.3px}
+.leistungen-content>p{color:var(--gray);font-weight:300;margin-bottom:48px;line-height:1.8}
+.leistung-item{display:flex;gap:20px;align-items:flex-start;margin-bottom:32px}
+.leistung-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:8px}
+.leistung-item h4{font-size:.95rem;font-weight:600;color:var(--navy);margin-bottom:2px}
+.leistung-item p{font-size:.85rem;color:var(--gray);font-weight:300;line-height:1.6}
+.leistungen-visual{text-align:center}
+.process-card{background:var(--white);border-radius:var(--radius);padding:48px 40px;box-shadow:0 8px 40px rgba(27,42,74,.06)}
+.process-card h3{font-size:1.3rem;font-weight:600;color:var(--navy);margin-bottom:36px}
+.step{display:flex;align-items:center;gap:20px;padding:16px 0;border-bottom:1px solid rgba(0,0,0,.04)}
+.step:last-child{border-bottom:none}
+.step-num{width:36px;height:36px;border-radius:50%;background:var(--navy);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;flex-shrink:0}
+.step span{font-size:.9rem;color:var(--text);font-weight:400}
+
+/* ─── PREISE ─── */
+.preise{background:var(--white)}
+.preise-header{text-align:center;margin-bottom:64px}
+.preise-header h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;color:var(--navy);letter-spacing:-.3px}
+.preise-header p{font-size:1rem;color:var(--gray);margin-top:12px;font-weight:300}
+.preise-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.preis-card{background:var(--off-white);border-radius:var(--radius);padding:48px 36px;text-align:center;transition:var(--transition);border:2px solid transparent;position:relative}
+.preis-card:hover{transform:translateY(-4px)}
+.preis-card.featured{background:var(--navy);color:var(--white);border-color:var(--gold);transform:scale(1.03)}
+.preis-card.featured:hover{transform:scale(1.03) translateY(-4px)}
+.preis-card.featured h3{color:var(--gold)}
+.preis-card.featured .preis-desc{color:rgba(255,255,255,.5)}
+.preis-card.featured .preis-value{color:var(--white)}
+.preis-card.featured .preis-features li{color:rgba(255,255,255,.6)}
+.preis-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--navy);font-size:.7rem;font-weight:700;padding:5px 18px;border-radius:100px;letter-spacing:.5px;text-transform:uppercase}
+.preis-card h3{font-size:.9rem;font-weight:600;color:var(--navy);letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px}
+.preis-desc{font-size:.8rem;color:var(--gray);margin-bottom:32px}
+.preis-value{font-size:3.2rem;font-weight:700;color:var(--navy);margin-bottom:32px;letter-spacing:-1px}
+.preis-value span{font-size:1rem;font-weight:400;color:var(--gray)}
+.preis-features{list-style:none;text-align:left;margin-bottom:36px;display:flex;flex-direction:column;gap:12px}
+.preis-features li{font-size:.85rem;color:var(--text);display:flex;align-items:center;gap:12px;font-weight:300}
+.preis-features li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0}
+.preis-card .btn-gold{width:100%;justify-content:center;padding:14px 32px}
+.btn-outline{width:100%;justify-content:center;display:inline-flex;align-items:center;background:transparent;color:var(--navy);padding:14px 32px;border-radius:100px;font-weight:600;font-size:.9rem;text-decoration:none;transition:var(--transition);border:1.5px solid rgba(27,42,74,.15);cursor:pointer;letter-spacing:.3px}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ─── ABOUT ─── */
+.about{background:var(--off-white)}
+.about-inner{display:grid;grid-template-columns:auto 1fr;gap:80px;align-items:center}
+.about-img{width:280px;aspect-ratio:3/4;object-fit:cover;border-radius:var(--radius);box-shadow:0 20px 60px rgba(27,42,74,.1)}
+.about-content h2{font-size:clamp(1.4rem,2.5vw,1.8rem);font-weight:700;color:var(--navy);margin-bottom:20px;letter-spacing:-.3px}
+.about-content p{color:var(--gray);line-height:1.8;margin-bottom:16px;font-weight:300;font-size:.95rem}
+.about-signature{font-size:1rem;font-weight:600;color:var(--navy);margin-top:28px}
+.about-signature span{color:var(--gold)}
+
+/* ─── KONTAKT ─── */
+.kontakt{background:var(--navy);color:var(--white)}
+.kontakt-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.kontakt-left h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;color:var(--white);margin-bottom:16px;letter-spacing:-.3px}
+.kontakt-left>p{color:rgba(255,255,255,.4);font-weight:300;margin-bottom:48px;line-height:1.8}
+.kontakt-item{display:flex;gap:16px;align-items:center;margin-bottom:28px}
+.kontakt-item i{color:var(--gold);width:20px;text-align:center;font-size:.9rem}
+.kontakt-item a,.kontakt-item span{color:rgba(255,255,255,.6);text-decoration:none;font-size:.9rem;font-weight:300;transition:var(--transition)}
+.kontakt-item a:hover{color:var(--gold)}
+.whatsapp-btn{display:inline-flex;align-items:center;gap:12px;background:#25D366;color:var(--white);padding:14px 32px;border-radius:100px;font-weight:600;font-size:.9rem;text-decoration:none;transition:var(--transition);margin-top:20px}
+.whatsapp-btn:hover{background:#20bd5a;transform:translateY(-2px)}
+.kontakt-form{display:flex;flex-direction:column;gap:16px}
+.kontakt-form input,.kontakt-form textarea{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px 20px;color:var(--white);font-family:inherit;font-size:.9rem;transition:var(--transition);outline:none;font-weight:300}
+.kontakt-form input::placeholder,.kontakt-form textarea::placeholder{color:rgba(255,255,255,.25)}
+.kontakt-form input:focus,.kontakt-form textarea:focus{border-color:var(--gold);background:rgba(255,255,255,.08)}
+.kontakt-form textarea{resize:vertical;min-height:120px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+/* ─── FOOTER ─── */
+.footer{background:var(--navy-dark);padding:32px 0}
+.footer-inner{display:flex;align-items:center;justify-content:space-between}
+.footer-left{font-size:.8rem;color:rgba(255,255,255,.3);font-weight:300}
+.footer-links{display:flex;gap:24px}
+.footer-links a{color:rgba(255,255,255,.3);text-decoration:none;font-size:.8rem;transition:var(--transition);font-weight:300}
+.footer-links a:hover{color:var(--gold)}
+
+/* ─── MOBILE ─── */
+@media(max-width:1024px){
+.hero-inner{grid-template-columns:1fr;gap:48px;text-align:center}
+.hero p{margin:0 auto 48px}
+.hero-buttons{justify-content:center}
+.leistungen-inner{grid-template-columns:1fr}
+.about-inner{grid-template-columns:1fr;text-align:center}
+.about-img{margin:0 auto}
+.kontakt-inner{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+section{padding:80px 0}
+.nav-links,.nav-cta{display:none}
+.nav-toggle{display:flex}
+.stats-grid{grid-template-columns:1fr;gap:32px}
+.touren-grid{grid-template-columns:1fr}
+.preise-grid{grid-template-columns:1fr;max-width:380px;margin:0 auto}
+.preis-card.featured{transform:none}
+.form-row{grid-template-columns:1fr}
+.footer-inner{flex-direction:column;gap:16px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+<div class="container nav-inner">
+<a href="#" class="nav-logo">
+<img src="logo.png" alt="Lunavo Media" onerror="this.style.display='none'">
+<span>Lunavo Media</span>
+</a>
+<ul class="nav-links">
+<li><a href="#touren">Touren</a></li>
+<li><a href="#leistungen">Leistungen</a></li>
+<li><a href="#preise">Preise</a></li>
+<li><a href="#kontakt">Kontakt</a></li>
+</ul>
+<a href="#kontakt" class="nav-cta">Beratung buchen</a>
+<button class="nav-toggle" id="navToggle" aria-label="Menü"><span></span><span></span><span></span></button>
+</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+<div class="container">
+<div class="hero-inner">
+<div class="hero-content">
+<div class="hero-label">360° Virtual Tours · Kiel</div>
+<h1>Immobilien <em>erleben</em> —<br>nicht nur besichtigen.</h1>
+<p>Professionelle Matterport 3D-Touren, die Käufer begeistern und Ihre Immobilien schneller verkaufen.</p>
+<div class="hero-buttons">
+<a href="#kontakt" class="btn-gold">Kostenlose Beratung</a>
+<a href="#touren" class="btn-ghost">Touren ansehen →</a>
+</div>
+</div>
+<div class="hero-visual">
+<div class="hero-frame">
+<iframe src="https://my.matterport.com/show/?m=89vMFQ7CJJL" allowfullscreen loading="lazy"></iframe>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+<div class="container">
+<div class="stats-grid">
+<div class="reveal">
+<div class="stat-number">40%</div>
+<div class="stat-label">Schnellerer Verkauf</div>
+</div>
+<div class="reveal">
+<div class="stat-number">60%</div>
+<div class="stat-label">Weniger Besichtigungen</div>
+</div>
+<div class="reveal">
+<div class="stat-number">48h</div>
+<div class="stat-label">Lieferzeit</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- TOUREN -->
+<section class="touren" id="touren">
+<div class="container">
+<div class="touren-header">
+<h2>Erleben Sie den Unterschied</h2>
+<p>Navigieren Sie frei durch die Räume — genau wie vor Ort.</p>
+</div>
+<div class="touren-grid">
+<div class="tour-card reveal">
+<iframe src="https://my.matterport.com/show/?m=89vMFQ7CJJL" allowfullscreen loading="lazy"></iframe>
+</div>
+<div class="tour-card reveal">
+<iframe src="https://my.matterport.com/show/?m=2TPJdh4qmGJ" allowfullscreen loading="lazy"></iframe>
+</div>
+</div>
+</div>
+</section>
+
+<!-- LEISTUNGEN -->
+<section class="leistungen" id="leistungen">
+<div class="container">
+<div class="leistungen-inner">
+<div class="leistungen-content">
+<h2>Alles aus einer Hand.</h2>
+<p>Von der Aufnahme bis zur fertigen Tour — ein Rundum-Sorglos-Paket.</p>
+<div class="leistung-item reveal"><div class="leistung-dot"></div><div><h4>360° Aufnahme vor Ort</h4><p>Professionelle Aufnahme mit modernster Matterport-Kamera.</p></div></div>
+<div class="leistung-item reveal"><div class="leistung-dot"></div><div><h4>Grundriss-Integration</h4><p>Interaktiver 2D-Grundriss direkt in der Tour.</p></div></div>
+<div class="leistung-item reveal"><div class="leistung-dot"></div><div><h4>Portal-Einbindung</h4><p>Fertig für ImmoScout24, Immowelt & Ihre Website.</p></div></div>
+<div class="leistung-item reveal"><div class="leistung-dot"></div><div><h4>Unbegrenzte Nutzung</h4><p>Kein Abo. Keine versteckten Kosten. Die Tour gehört Ihnen.</p></div></div>
+</div>
+<div class="leistungen-visual reveal">
+<div class="process-card">
+<h3>In 3 Schritten zur Tour</h3>
+<div class="step"><span class="step-num">1</span><span>Termin vereinbaren</span></div>
+<div class="step"><span class="step-num">2</span><span>Aufnahme vor Ort (1–2 Std.)</span></div>
+<div class="step"><span class="step-num">3</span><span>Fertige Tour in 48h</span></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- PREISE -->
+<section class="preise" id="preise">
+<div class="container">
+<div class="preise-header">
+<h2>Transparent & fair</h2>
+<p>Keine versteckten Kosten.</p>
+</div>
+<div class="preise-grid">
+<div class="preis-card reveal">
+<h3>Einzeltour</h3>
+<p class="preis-desc">Für einzelne Objekte</p>
+<div class="preis-value">450<span>€</span></div>
+<ul class="preis-features">
+<li>360° Aufnahme</li>
+<li>Grundriss-Integration</li>
+<li>Portal-Einbindung</li>
+<li>48h Lieferung</li>
+<li>Unbegrenzte Nutzung</li>
+</ul>
+<a href="#kontakt" class="btn-outline">Anfragen</a>
+</div>
+<div class="preis-card featured reveal">
+<span class="preis-badge">Willkommensangebot</span>
+<h3>Erste Tour</h3>
+<p class="preis-desc">Zum Kennenlernen</p>
+<div class="preis-value">200<span>€</span></div>
+<ul class="preis-features">
+<li>360° Aufnahme</li>
+<li>Grundriss-Integration</li>
+<li>Portal-Einbindung</li>
+<li>48h Lieferung</li>
+<li>Unbegrenzte Nutzung</li>
+</ul>
+<a href="#kontakt" class="btn-gold">Jetzt sichern</a>
+</div>
+<div class="preis-card reveal">
+<h3>5er-Paket</h3>
+<p class="preis-desc">Für Makler & Verwaltungen</p>
+<div class="preis-value">850<span>€</span></div>
+<ul class="preis-features">
+<li>5 komplette Touren</li>
+<li>Nur 170€ pro Tour</li>
+<li>Prioritäts-Termine</li>
+<li>48h Lieferung</li>
+<li>Unbegrenzte Nutzung</li>
+</ul>
+<a href="#kontakt" class="btn-outline">Anfragen</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+<div class="container">
+<div class="about-inner">
+<img src="profil.jpg" alt="Luca Wiese" class="about-img reveal">
+<div class="about-content reveal">
+<h2>Luca Wiese</h2>
+<p>Immobilien verdienen mehr als Standbilder. Deshalb habe ich Lunavo Media gegründet — um Maklern in Kiel die Möglichkeit zu geben, ihre Objekte so zu präsentieren, wie sie es verdienen.</p>
+<p>Persönlich. Zuverlässig. Premium.</p>
+<div class="about-signature">— <span>Lunavo Media</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- KONTAKT -->
+<section class="kontakt" id="kontakt">
+<div class="container">
+<div class="kontakt-inner">
+<div class="kontakt-left">
+<h2>Lassen Sie uns sprechen.</h2>
+<p>Kostenlose Erstberatung — unverbindlich und persönlich.</p>
+<div class="kontakt-item"><i class="fas fa-phone"></i><a href="tel:+4915154880722">+49 151 548 80 722</a></div>
+<div class="kontakt-item"><i class="fas fa-envelope"></i><a href="mailto:luca.wiese@lunavo-media.de">luca.wiese@lunavo-media.de</a></div>
+<div class="kontakt-item"><i class="fas fa-map-marker-alt"></i><span>Kiel & Umgebung</span></div>
+<a href="https://wa.me/4915154880722?text=Hallo%20Luca%2C%20ich%20interessiere%20mich%20f%C3%BCr%20eine%20360%C2%B0-Tour." class="whatsapp-btn" target="_blank" rel="noopener">
+<i class="fab fa-whatsapp"></i> WhatsApp schreiben
+</a>
+</div>
+<form class="kontakt-form" action="#" method="POST">
+<div class="form-row">
+<input type="text" name="name" placeholder="Name" required>
+<input type="email" name="email" placeholder="E-Mail" required>
+</div>
+<input type="tel" name="phone" placeholder="Telefon (optional)">
+<textarea name="message" placeholder="Ihre Nachricht..." rows="5" required></textarea>
+<button type="submit" class="btn-gold" style="align-self:flex-start">Nachricht senden</button>
+</form>
+</div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+<div class="container footer-inner">
+<span class="footer-left">© 2026 Lunavo Media</span>
+<div class="footer-links">
+<a href="impressum.html">Impressum</a>
+<a href="datenschutz.html">Datenschutz</a>
+</div>
+</div>
+</footer>
+
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>50));
+document.getElementById('navToggle').addEventListener('click',function(){this.classList.toggle('open')});
+const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
