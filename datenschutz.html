@@ -9,147 +9,321 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{--navy:#1B2A4A;--navy-light:#243556;--navy-dark:#111D33;--gold:#C9A84C;--gold-light:#D4B96A;--white:#FFFFFF;--off-white:#F7F8FA;--gray:#94A3B8;--text:#334155;--radius:12px;--radius-lg:20px;--transition:all .3s cubic-bezier(.4,0,.2,1)}
+:root{
+  --navy:#111D33;
+  --navy-mid:#1B2A4A;
+  --navy-light:#243556;
+  --gold:#D4B96A;
+  --gold-dark:#B89A50;
+  --white:#FFFFFF;
+  --off-white:#F8F9FB;
+  --gray-200:#E2E8F0;
+  --gray-600:#64748B;
+  --gray-800:#334155;
+  --r:12px;
+  --transition:all .3s cubic-bezier(.4,0,.2,1)
+}
 html{scroll-behavior:smooth;font-size:16px}
-body{font-family:'Inter',system-ui,sans-serif;color:var(--text);line-height:1.6;background:var(--white)}
-.container{max-width:1200px;margin:0 auto;padding:0 24px}
-.nav{background:var(--navy);padding:16px 0}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--gray-800);line-height:1.6;background:var(--white)}
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+
+/* NAV */
+.nav{background:var(--navy);padding:18px 0}
 .nav-inner{display:flex;align-items:center;justify-content:space-between}
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-.nav-logo img{height:36px;width:auto}
-.nav-logo span{font-size:1.2rem;font-weight:700;color:var(--white);letter-spacing:-.5px}
-.nav-back{color:rgba(255,255,255,.75);text-decoration:none;font-size:.875rem;font-weight:500;transition:var(--transition);display:flex;align-items:center;gap:8px}
+.nav-logo img{height:28px;width:auto}
+.nav-logo span{font-size:1rem;font-weight:600;color:var(--white);letter-spacing:-.2px}
+.nav-back{color:rgba(255,255,255,.65);text-decoration:none;font-size:.875rem;font-weight:500;transition:var(--transition);display:flex;align-items:center;gap:8px}
 .nav-back:hover{color:var(--gold)}
-.legal{padding:80px 0 100px;max-width:800px;margin:0 auto}
-.legal h1{font-size:2rem;font-weight:800;color:var(--navy);margin-bottom:40px}
-.legal h2{font-size:1.2rem;font-weight:700;color:var(--navy);margin-top:32px;margin-bottom:12px}
-.legal h3{font-size:1.05rem;font-weight:600;color:var(--navy);margin-top:20px;margin-bottom:8px}
-.legal p,.legal li{font-size:.95rem;color:var(--text);line-height:1.8;margin-bottom:8px}
-.legal ul{margin-left:20px;margin-bottom:12px}
-.legal a{color:var(--gold);text-decoration:none}
+.nav-back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* TOC */
+.toc{background:var(--off-white);border:1px solid var(--gray-200);border-radius:var(--r);padding:24px 28px;margin-bottom:48px}
+.toc-title{font-size:.8rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--gray-600);margin-bottom:14px}
+.toc ol{padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.toc li{font-size:.88rem}
+.toc a{color:var(--navy-mid);text-decoration:none;transition:var(--transition)}
+.toc a:hover{color:var(--gold-dark)}
+
+/* CONTENT */
+.legal-wrap{padding:80px 0 100px}
+.legal{max-width:760px}
+.legal-header{margin-bottom:48px;padding-bottom:32px;border-bottom:1px solid var(--gray-200)}
+.legal-label{font-size:.75rem;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold-dark);margin-bottom:12px}
+.legal h1{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;color:var(--navy);letter-spacing:-1px;line-height:1.15}
+.legal-updated{color:var(--gray-600);font-size:.82rem;margin-top:12px}
+.legal-section{margin-bottom:44px;scroll-margin-top:24px}
+.legal h2{font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--gray-200)}
+.legal h3{font-size:.95rem;font-weight:600;color:var(--navy);margin-top:20px;margin-bottom:8px}
+.legal p{font-size:.92rem;color:var(--gray-800);line-height:1.8;margin-bottom:10px}
+.legal p:last-child{margin-bottom:0}
+.legal ul{margin:10px 0 14px 20px;display:flex;flex-direction:column;gap:6px}
+.legal li{font-size:.92rem;color:var(--gray-800);line-height:1.7}
+.legal a{color:var(--gold-dark);text-decoration:none;font-weight:500}
 .legal a:hover{text-decoration:underline}
-.footer{background:var(--navy-dark);color:rgba(255,255,255,.4);padding:40px 0}
+.info-block{background:var(--off-white);border:1px solid var(--gray-200);border-radius:var(--r);padding:20px 24px;margin:16px 0}
+.info-block p{margin-bottom:6px;font-size:.92rem}
+.info-block p:last-child{margin-bottom:0}
+.notice{background:rgba(212,185,106,.08);border:1px solid rgba(212,185,106,.3);border-radius:var(--r);padding:16px 20px;margin:14px 0}
+.notice p{font-size:.88rem;color:var(--navy-mid);margin-bottom:0}
+.notice strong{color:var(--navy)}
+
+/* FOOTER */
+.footer{background:var(--navy);padding:28px 0;border-top:1px solid rgba(255,255,255,.06)}
 .footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
-.footer-logo{display:flex;align-items:center;gap:8px;font-weight:600;color:var(--white);font-size:1rem}
+.footer-brand{display:flex;align-items:center;gap:8px}
+.footer-brand img{height:22px;width:auto;opacity:.7}
+.footer-brand span{color:rgba(255,255,255,.5);font-size:.8rem;font-weight:500}
 .footer-links{display:flex;gap:24px}
-.footer-links a{color:rgba(255,255,255,.4);text-decoration:none;font-size:.85rem;transition:var(--transition)}
+.footer-links a{color:rgba(255,255,255,.4);text-decoration:none;font-size:.8rem;transition:var(--transition)}
 .footer-links a:hover{color:var(--gold)}
-.footer-copy{font-size:.8rem}
-@media(max-width:768px){.footer-inner{flex-direction:column;text-align:center}}
+.footer-links a[aria-current="page"]{color:var(--gold)}
+.footer-copy{color:rgba(255,255,255,.3);font-size:.78rem}
+@media(max-width:600px){.footer-inner{flex-direction:column;text-align:center}.footer-links{justify-content:center}}
 </style>
 </head>
 <body>
 
 <nav class="nav">
-<div class="container nav-inner">
-<a href="index.html" class="nav-logo">
-<img src="logo.png" alt="Lunavo Media" onerror="this.style.display='none'">
-<span>Lunavo Media</span>
-</a>
-<a href="index.html" class="nav-back"><i class="fas fa-arrow-left"></i> Zurück zur Startseite</a>
-</div>
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="logo.png" alt="Lunavo Media" onerror="this.style.display='none'">
+      <span>Lunavo Media</span>
+    </a>
+    <a href="index.html" class="nav-back">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      Zurück zur Startseite
+    </a>
+  </div>
 </nav>
 
 <div class="container">
-<div class="legal">
-<h1>Datenschutzerklärung</h1>
+  <div class="legal-wrap">
+    <div class="legal">
 
-<h2>1. Datenschutz auf einen Blick</h2>
-<h3>Allgemeine Hinweise</h3>
-<p>Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können. Ausführliche Informationen zum Thema Datenschutz entnehmen Sie unserer nachfolgenden Datenschutzerklärung.</p>
+      <div class="legal-header">
+        <div class="legal-label">Rechtliches</div>
+        <h1>Datenschutzerklärung</h1>
+        <p class="legal-updated">Stand: Februar 2026 · Gemäß DSGVO, TDDDG</p>
+      </div>
 
-<h3>Datenerfassung auf dieser Website</h3>
-<p><strong>Wer ist verantwortlich für die Datenerfassung auf dieser Website?</strong><br>
-Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber:</p>
-<p>Lunavo Media<br>Inhaber: Luca Noel Wiese<br>Am Knick 8a<br>24248 Mönkeberg<br>E-Mail: <a href="mailto:luca.wiese@lunavo-media.de">luca.wiese@lunavo-media.de</a><br>Telefon: +49 151 54880722</p>
+      <!-- INHALTSVERZEICHNIS -->
+      <nav class="toc" aria-label="Inhaltsverzeichnis">
+        <div class="toc-title">Inhalt</div>
+        <ol>
+          <li><a href="#verantwortlicher">Verantwortlicher</a></li>
+          <li><a href="#ueberblick">Datenschutz auf einen Blick</a></li>
+          <li><a href="#hosting">Hosting (GitHub Pages)</a></li>
+          <li><a href="#google-fonts">Google Fonts</a></li>
+          <li><a href="#kontaktformular">Kontaktformular</a></li>
+          <li><a href="#whatsapp">WhatsApp-Kontakt</a></li>
+          <li><a href="#ssl">SSL-/TLS-Verschlüsselung</a></li>
+          <li><a href="#cookies">Cookies &amp; Tracking</a></li>
+          <li><a href="#rechte">Ihre Rechte als betroffene Person</a></li>
+          <li><a href="#aufsicht">Aufsichtsbehörde</a></li>
+        </ol>
+      </nav>
 
-<p><strong>Wie erfassen wir Ihre Daten?</strong><br>
-Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen, z.&nbsp;B. über das Kontaktformular. Andere Daten werden automatisch oder nach Ihrer Einwilligung beim Besuch der Website durch unsere IT-Systeme erfasst. Das sind vor allem technische Daten (z.&nbsp;B. Internetbrowser, Betriebssystem oder Uhrzeit des Seitenaufrufs).</p>
+      <!-- 1. VERANTWORTLICHER -->
+      <div class="legal-section" id="verantwortlicher">
+        <h2>1. Verantwortlicher</h2>
+        <p>Verantwortlicher im Sinne der Datenschutz-Grundverordnung (DSGVO) und des Telekommunikation-Digitale-Dienste-Datenschutz-Gesetzes (TDDDG) ist:</p>
+        <div class="info-block">
+          <p><strong>Lunavo Media</strong></p>
+          <p>Inhaber: Luca Noel Wiese</p>
+          <p>Am Knick 8a<br>24248 Mönkeberg</p>
+          <p>Telefon: <a href="tel:+4915154880722">+49 151 54880722</a></p>
+          <p>E-Mail: <a href="mailto:luca.wiese@lunavo-media.de">luca.wiese@lunavo-media.de</a></p>
+        </div>
+      </div>
 
-<p><strong>Wofür nutzen wir Ihre Daten?</strong><br>
-Ein Teil der Daten wird erhoben, um eine fehlerfreie Bereitstellung der Website zu gewährleisten. Andere Daten können zur Analyse Ihres Nutzerverhaltens verwendet werden.</p>
+      <!-- 2. ÜBERBLICK -->
+      <div class="legal-section" id="ueberblick">
+        <h2>2. Datenschutz auf einen Blick</h2>
 
-<p><strong>Welche Rechte haben Sie bezüglich Ihrer Daten?</strong><br>
-Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht, die Berichtigung oder Löschung dieser Daten zu verlangen. Wenn Sie eine Einwilligung zur Datenverarbeitung erteilt haben, können Sie diese Einwilligung jederzeit für die Zukunft widerrufen. Außerdem haben Sie das Recht, unter bestimmten Umständen die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen. Des Weiteren steht Ihnen ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu.</p>
+        <h3>Was passiert mit Ihren Daten?</h3>
+        <p>Diese Website erhebt und verarbeitet personenbezogene Daten nur in dem Maß, wie es für den Betrieb der Seite und die Beantwortung Ihrer Anfragen erforderlich ist. Wir setzen keine Tracking-Dienste, keine Analyse-Tools und keine Werbecookies ein.</p>
 
-<h2>2. Hosting</h2>
-<p>Diese Website wird bei einem externen Dienstleister gehostet (Hoster). Die personenbezogenen Daten, die auf dieser Website erfasst werden, werden auf den Servern des Hosters gespeichert. Hierbei kann es sich v.&nbsp;a. um IP-Adressen, Kontaktanfragen, Meta- und Kommunikationsdaten, Vertragsdaten, Kontaktdaten, Namen, Websitezugriffe und sonstige Daten, die über eine Website generiert werden, handeln.</p>
-<p>Der Einsatz des Hosters erfolgt im Interesse einer sicheren, schnellen und effizienten Bereitstellung unseres Online-Angebots durch einen professionellen Anbieter (Art. 6 Abs. 1 lit. f DSGVO).</p>
+        <h3>Datenerfassung auf dieser Website</h3>
+        <p>Folgende Daten werden verarbeitet:</p>
+        <ul>
+          <li><strong>Technische Zugriffsdaten</strong> (Server-Logs) durch unseren Hosting-Anbieter GitHub Pages</li>
+          <li><strong>Schriftartanfragen</strong> an Google Fonts beim Laden der Seite</li>
+          <li><strong>Kontaktdaten</strong>, die Sie uns über das Formular mitteilen (Name, E-Mail, Telefon, Nachricht)</li>
+          <li><strong>Kommunikationsdaten</strong> bei Kontaktaufnahme über den WhatsApp-Link</li>
+        </ul>
 
-<h2>3. Allgemeine Hinweise und Pflichtinformationen</h2>
-<h3>Datenschutz</h3>
-<p>Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend den gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.</p>
-<p>Wir weisen darauf hin, dass die Datenübertragung im Internet (z.&nbsp;B. bei der Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich.</p>
+        <h3>Ihre Rechte</h3>
+        <p>Sie haben jederzeit das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer personenbezogenen Daten sowie ein Widerspruchsrecht und das Recht auf Datenübertragbarkeit. Details finden Sie unter <a href="#rechte">Abschnitt 9</a>.</p>
+      </div>
 
-<h3>Hinweis zur verantwortlichen Stelle</h3>
-<p>Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:</p>
-<p>Lunavo Media<br>Luca Noel Wiese<br>Am Knick 8a<br>24248 Mönkeberg<br>E-Mail: <a href="mailto:luca.wiese@lunavo-media.de">luca.wiese@lunavo-media.de</a><br>Telefon: +49 151 54880722</p>
+      <!-- 3. HOSTING -->
+      <div class="legal-section" id="hosting">
+        <h2>3. Hosting (GitHub Pages)</h2>
+        <p>Diese Website wird über den Dienst <strong>GitHub Pages</strong> des Unternehmens GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA (Teil der Microsoft-Unternehmensgruppe) gehostet.</p>
 
-<h3>Speicherdauer</h3>
-<p>Soweit innerhalb dieser Datenschutzerklärung keine speziellere Speicherdauer genannt wurde, verbleiben Ihre personenbezogenen Daten bei uns, bis der Zweck für die Datenverarbeitung entfällt. Wenn Sie ein berechtigtes Löschersuchen geltend machen oder eine Einwilligung zur Datenverarbeitung widerrufen, werden Ihre Daten gelöscht, sofern wir keine anderen rechtlich zulässigen Gründe für die Speicherung Ihrer personenbezogenen Daten haben.</p>
+        <h3>Was wird verarbeitet?</h3>
+        <p>Bei jedem Aufruf der Website werden automatisch Informationen in sogenannten Server-Log-Dateien erfasst, die Ihr Browser übermittelt:</p>
+        <ul>
+          <li>IP-Adresse des anfragenden Rechners</li>
+          <li>Datum und Uhrzeit der Anfrage</li>
+          <li>Aufgerufene Seite / Datei (URL)</li>
+          <li>Browsertyp und Browserversion</li>
+          <li>Verwendetes Betriebssystem</li>
+          <li>Referrer-URL (die zuvor besuchte Seite)</li>
+          <li>HTTP-Statuscode</li>
+        </ul>
+        <p>Diese Daten werden nicht mit anderen Datenquellen zusammengeführt und nicht zur Identifikation einzelner Personen genutzt.</p>
 
-<h3>Widerruf Ihrer Einwilligung zur Datenverarbeitung</h3>
-<p>Viele Datenverarbeitungsvorgänge sind nur mit Ihrer ausdrücklichen Einwilligung möglich. Sie können eine bereits erteilte Einwilligung jederzeit widerrufen. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Datenverarbeitung bleibt vom Widerruf unberührt.</p>
+        <h3>Rechtsgrundlage und Speicherdauer</h3>
+        <p>Die Verarbeitung erfolgt auf Grundlage von <strong>Art. 6 Abs. 1 lit. f DSGVO</strong> (berechtigtes Interesse). Das berechtigte Interesse liegt in der Sicherstellung des technischen Betriebs und der Sicherheit der Website. Log-Dateien werden von GitHub nach wenigen Tagen automatisch gelöscht.</p>
 
-<h3>Beschwerderecht bei der zuständigen Aufsichtsbehörde</h3>
-<p>Im Falle von Verstößen gegen die DSGVO steht den Betroffenen ein Beschwerderecht bei einer Aufsichtsbehörde zu. Zuständige Aufsichtsbehörde in datenschutzrechtlichen Fragen ist das Unabhängige Landeszentrum für Datenschutz Schleswig-Holstein (ULD), Holstenstraße 98, 24103 Kiel.</p>
+        <h3>Drittlandübermittlung</h3>
+        <p>Da GitHub, Inc. in den USA ansässig ist, kann eine Übermittlung personenbezogener Daten in die USA stattfinden. Die Übermittlung erfolgt auf Grundlage des EU-U.S. Data Privacy Frameworks (Angemessenheitsbeschluss der EU-Kommission). Weitere Informationen: <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">GitHub Privacy Statement</a>.</p>
+      </div>
 
-<h3>Recht auf Datenübertragbarkeit</h3>
-<p>Sie haben das Recht, Daten, die wir auf Grundlage Ihrer Einwilligung oder in Erfüllung eines Vertrags automatisiert verarbeiten, an sich oder an einen Dritten in einem gängigen, maschinenlesbaren Format aushändigen zu lassen.</p>
+      <!-- 4. GOOGLE FONTS -->
+      <div class="legal-section" id="google-fonts">
+        <h2>4. Google Fonts</h2>
+        <p>Diese Website verwendet <strong>Google Fonts</strong>, einen Dienst der Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Die Schriftarten werden direkt von Servern von Google (fonts.googleapis.com) geladen, wenn Sie diese Website besuchen.</p>
 
-<h3>Auskunft, Löschung und Berichtigung</h3>
-<p>Sie haben im Rahmen der geltenden gesetzlichen Bestimmungen jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen Daten, deren Herkunft und Empfänger und den Zweck der Datenverarbeitung und ggf. ein Recht auf Berichtigung oder Löschung dieser Daten.</p>
+        <h3>Was wird verarbeitet?</h3>
+        <p>Beim Laden der Seite wird eine direkte Verbindung zu den Google-Servern hergestellt. Dabei wird Ihre <strong>IP-Adresse</strong> sowie Informationen über Ihren Browser und Ihr Betriebssystem an Google übermittelt.</p>
 
-<h2>4. Datenerfassung auf dieser Website</h2>
+        <div class="notice">
+          <p><strong>Hinweis:</strong> Google Fonts werden bei dieser Website über externe Server eingebunden (<code>fonts.googleapis.com</code>). Dies dient der einheitlichen und korrekten Darstellung der Website. Wenn Ihnen dies nicht wünschenswert erscheint, können Sie in Ihren Browsereinstellungen die Schriftarten blockieren — die Seite bleibt weiterhin vollständig nutzbar.</p>
+        </div>
 
-<h3>Server-Log-Dateien</h3>
-<p>Der Provider der Seiten erhebt und speichert automatisch Informationen in so genannten Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt. Dies sind:</p>
-<ul>
-<li>Browsertyp und Browserversion</li>
-<li>verwendetes Betriebssystem</li>
-<li>Referrer URL</li>
-<li>Hostname des zugreifenden Rechners</li>
-<li>Uhrzeit der Serveranfrage</li>
-<li>IP-Adresse</li>
-</ul>
-<p>Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen. Die Erfassung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO.</p>
+        <h3>Rechtsgrundlage und Drittlandübermittlung</h3>
+        <p>Die Verarbeitung erfolgt auf Grundlage von <strong>Art. 6 Abs. 1 lit. f DSGVO</strong> (berechtigtes Interesse an der einheitlichen Darstellung unseres Angebots). Durch die Einbindung können Daten an Google LLC in den USA übermittelt werden. Weitere Informationen: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Datenschutzerklärung</a> und <a href="https://developers.google.com/fonts/faq/privacy" target="_blank" rel="noopener noreferrer">Google Fonts Datenschutz-FAQ</a>.</p>
+      </div>
 
-<h3>Kontaktformular</h3>
-<p>Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.</p>
-<p>Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist. In allen übrigen Fällen beruht die Verarbeitung auf unserem berechtigten Interesse an der effektiven Bearbeitung der an uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO).</p>
+      <!-- 5. KONTAKTFORMULAR -->
+      <div class="legal-section" id="kontaktformular">
+        <h2>5. Kontaktformular</h2>
+        <p>Auf unserer Website stellen wir ein Kontaktformular bereit, über das Sie uns direkt eine Anfrage senden können.</p>
 
-<h3>Anfrage per E-Mail oder Telefon</h3>
-<p>Wenn Sie uns per E-Mail oder Telefon kontaktieren, wird Ihre Anfrage inklusive aller daraus hervorgehenden personenbezogenen Daten (Name, Anfrage) zum Zwecke der Bearbeitung Ihres Anliegens bei uns gespeichert und verarbeitet. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.</p>
+        <h3>Welche Daten werden erhoben?</h3>
+        <p>Im Formular werden folgende Daten abgefragt:</p>
+        <ul>
+          <li>Vorname und Nachname (Pflichtfeld)</li>
+          <li>E-Mail-Adresse (Pflichtfeld)</li>
+          <li>Telefonnummer (optional)</li>
+          <li>Ihre Nachricht / Anfrage (Pflichtfeld)</li>
+        </ul>
+        <p>Zusätzlich wird der Zeitpunkt der Absendung gespeichert.</p>
 
-<h2>5. Eingebettete Inhalte (Matterport)</h2>
-<p>Auf dieser Website werden interaktive 3D-Touren des Anbieters Matterport, Inc. (352 E. Java Dr., Sunnyvale, CA 94089, USA) eingebettet. Beim Laden der Matterport-Touren wird eine Verbindung zu den Servern von Matterport hergestellt. Dabei wird Ihre IP-Adresse an Matterport übermittelt.</p>
-<p>Matterport kann darüber hinaus Cookies auf Ihrem Endgerät setzen. Weitere Informationen finden Sie in der Datenschutzerklärung von Matterport: <a href="https://matterport.com/privacy-policy" target="_blank" rel="noopener">https://matterport.com/privacy-policy</a>.</p>
-<p>Die Nutzung von Matterport erfolgt im Interesse einer ansprechenden Darstellung unserer Dienstleistungen (Art. 6 Abs. 1 lit. f DSGVO).</p>
+        <h3>Zweck und Rechtsgrundlage</h3>
+        <p>Die erhobenen Daten verwenden wir ausschließlich zur Bearbeitung Ihrer Anfrage und für etwaige Rückfragen. Sie werden nicht ohne Ihre ausdrückliche Einwilligung an Dritte weitergegeben.</p>
+        <p>Die Verarbeitung erfolgt auf Grundlage von <strong>Art. 6 Abs. 1 lit. b DSGVO</strong>, sofern Ihre Anfrage auf den Abschluss oder die Durchführung eines Vertrags gerichtet ist. In allen übrigen Fällen stützen wir die Verarbeitung auf <strong>Art. 6 Abs. 1 lit. f DSGVO</strong> (berechtigtes Interesse an der Bearbeitung von Nutzeranfragen).</p>
 
-<h2>6. Google Fonts (extern)</h2>
-<p>Diese Seite nutzt zur einheitlichen Darstellung von Schriftarten so genannte Google Fonts, die von Google bereitgestellt werden. Beim Aufruf einer Seite lädt Ihr Browser die benötigten Fonts direkt von Google-Servern, wobei eine Verbindung zu Google hergestellt und Ihre IP-Adresse übermittelt wird. Weitere Informationen finden Sie unter <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">https://policies.google.com/privacy</a>.</p>
+        <h3>Speicherdauer</h3>
+        <p>Die im Rahmen des Kontaktformulars übermittelten Daten verbleiben bei uns, bis der Zweck der Speicherung entfällt (z.&nbsp;B. nach abgeschlossener Bearbeitung Ihrer Anfrage) oder Sie die Löschung verlangen. Gesetzliche Aufbewahrungspflichten bleiben unberührt.</p>
+      </div>
 
-<h2>7. WhatsApp-Kontakt</h2>
-<p>Auf unserer Website bieten wir die Möglichkeit, uns über WhatsApp (Meta Platforms Ireland Limited) zu kontaktieren. Wenn Sie diese Funktion nutzen, werden Ihre Daten gemäß den Datenschutzbestimmungen von WhatsApp verarbeitet. Weitere Informationen: <a href="https://www.whatsapp.com/legal/privacy-policy" target="_blank" rel="noopener">https://www.whatsapp.com/legal/privacy-policy</a>.</p>
+      <!-- 6. WHATSAPP -->
+      <div class="legal-section" id="whatsapp">
+        <h2>6. WhatsApp-Kontakt</h2>
+        <p>Auf dieser Website bieten wir einen Link an, über den Sie uns bequem per <strong>WhatsApp</strong> kontaktieren können (<code>wa.me</code>). WhatsApp ist ein Dienst der <strong>Meta Platforms Ireland Limited</strong>, 4 Grand Canal Square, Grand Canal Harbour, Dublin 2, Irland.</p>
 
-<h2>8. SSL- bzw. TLS-Verschlüsselung</h2>
-<p>Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte eine SSL- bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von „http://" auf „https://" wechselt und an dem Schloss-Symbol in Ihrer Browserzeile.</p>
-</div>
+        <div class="notice">
+          <p><strong>Hinweis:</strong> Der WhatsApp-Button ist ein einfacher Hyperlink. Durch das bloße Laden der Website wird <strong>keine</strong> Verbindung zu WhatsApp/Meta hergestellt. Erst wenn Sie aktiv auf den Link klicken und WhatsApp öffnen, werden Daten an Meta übermittelt.</p>
+        </div>
+
+        <h3>Was passiert bei der Nutzung?</h3>
+        <p>Wenn Sie über den Link eine WhatsApp-Nachricht an uns senden, werden Ihre Daten (Telefonnummer, Nachrichteninhalt) gemäß den Datenschutzbestimmungen von WhatsApp/Meta verarbeitet. Wir haben auf diese Datenverarbeitung keinen Einfluss.</p>
+        <p>Bitte beachten Sie, dass WhatsApp Ihre Daten unter anderem für Produktverbesserungen und — je nach Einstellungen — auch für Werbezwecke verarbeiten kann. Wir empfehlen, die Datenschutzhinweise von WhatsApp vor der Nutzung zu lesen:</p>
+        <p><a href="https://www.whatsapp.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">https://www.whatsapp.com/legal/privacy-policy</a></p>
+
+        <h3>Rechtsgrundlage</h3>
+        <p>Ihre Entscheidung, uns per WhatsApp zu kontaktieren, erfolgt freiwillig. Die Verarbeitung der dadurch entstehenden Kommunikation durch uns stützt sich auf <strong>Art. 6 Abs. 1 lit. b DSGVO</strong> (Vertragsanbahnung) bzw. <strong>Art. 6 Abs. 1 lit. f DSGVO</strong> (berechtigtes Interesse an der Kommunikation mit Interessenten).</p>
+      </div>
+
+      <!-- 7. SSL -->
+      <div class="legal-section" id="ssl">
+        <h2>7. SSL-/TLS-Verschlüsselung</h2>
+        <p>Diese Website nutzt aus Sicherheitsgründen eine <strong>SSL- bzw. TLS-Verschlüsselung</strong> für die Übertragung sensibler Inhalte. Eine verschlüsselte Verbindung erkennen Sie am <strong>Schloss-Symbol</strong> in der Adresszeile Ihres Browsers und daran, dass die Adresse mit <code>https://</code> beginnt.</p>
+        <p>Wenn die SSL- bzw. TLS-Verschlüsselung aktiviert ist, können die Daten, die Sie an uns übermitteln, nicht von Dritten mitgelesen werden.</p>
+      </div>
+
+      <!-- 8. COOKIES & TRACKING -->
+      <div class="legal-section" id="cookies">
+        <h2>8. Cookies &amp; Tracking</h2>
+        <div class="notice">
+          <p><strong>Kein Cookie-Banner erforderlich:</strong> Diese Website verwendet <strong>keine Tracking-Cookies, keine Analyse-Dienste</strong> (wie Google Analytics) und keine Werbetechnologien. Es werden ausschließlich technisch notwendige Prozesse eingesetzt, die für den Betrieb der Website erforderlich sind.</p>
+        </div>
+        <p>Da wir keine nicht-notwendigen Cookies setzen, ist gemäß <strong>§ 25 TDDDG</strong> (Telekommunikation-Digitale-Dienste-Datenschutz-Gesetz) keine Einwilligung über ein Cookie-Banner erforderlich.</p>
+      </div>
+
+      <!-- 9. BETROFFENENRECHTE -->
+      <div class="legal-section" id="rechte">
+        <h2>9. Ihre Rechte als betroffene Person</h2>
+        <p>Sie haben gegenüber uns folgende Rechte hinsichtlich der Sie betreffenden personenbezogenen Daten:</p>
+
+        <h3>Auskunftsrecht (Art. 15 DSGVO)</h3>
+        <p>Sie haben das Recht, Auskunft darüber zu verlangen, ob und welche personenbezogenen Daten wir von Ihnen verarbeiten, sowie über Zweck, Herkunft, Empfänger und Speicherdauer dieser Daten.</p>
+
+        <h3>Recht auf Berichtigung (Art. 16 DSGVO)</h3>
+        <p>Sie haben das Recht, die unverzügliche Berichtigung unrichtiger personenbezogener Daten zu verlangen.</p>
+
+        <h3>Recht auf Löschung (Art. 17 DSGVO)</h3>
+        <p>Sie haben das Recht, die Löschung Ihrer personenbezogenen Daten zu verlangen, sofern die gesetzlichen Voraussetzungen dafür erfüllt sind.</p>
+
+        <h3>Recht auf Einschränkung der Verarbeitung (Art. 18 DSGVO)</h3>
+        <p>Unter bestimmten Voraussetzungen haben Sie das Recht, die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen.</p>
+
+        <h3>Recht auf Datenübertragbarkeit (Art. 20 DSGVO)</h3>
+        <p>Sie haben das Recht, die Sie betreffenden personenbezogenen Daten in einem strukturierten, gängigen und maschinenlesbaren Format zu erhalten und diese Daten einem anderen Verantwortlichen zu übermitteln.</p>
+
+        <h3>Widerspruchsrecht (Art. 21 DSGVO)</h3>
+        <p>Sie haben das Recht, aus Gründen, die sich aus Ihrer besonderen Situation ergeben, jederzeit gegen die Verarbeitung Sie betreffender personenbezogener Daten, die auf Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse) beruht, Widerspruch einzulegen.</p>
+
+        <h3>Widerruf einer Einwilligung</h3>
+        <p>Sofern die Datenverarbeitung auf einer Einwilligung beruht, können Sie diese jederzeit mit Wirkung für die Zukunft widerrufen. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Datenverarbeitung bleibt davon unberührt.</p>
+
+        <h3>Geltendmachung Ihrer Rechte</h3>
+        <p>Wenden Sie sich für die Ausübung Ihrer Rechte an:</p>
+        <div class="info-block">
+          <p>Luca Noel Wiese · Lunavo Media</p>
+          <p>E-Mail: <a href="mailto:luca.wiese@lunavo-media.de">luca.wiese@lunavo-media.de</a></p>
+          <p>Telefon: <a href="tel:+4915154880722">+49 151 54880722</a></p>
+        </div>
+      </div>
+
+      <!-- 10. AUFSICHTSBEHÖRDE -->
+      <div class="legal-section" id="aufsicht">
+        <h2>10. Aufsichtsbehörde</h2>
+        <p>Im Falle von Verstößen gegen die DSGVO steht Ihnen ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu. Zuständige Datenschutzaufsichtsbehörde für Schleswig-Holstein ist:</p>
+        <div class="info-block">
+          <p><strong>Unabhängiges Landeszentrum für Datenschutz Schleswig-Holstein (ULD)</strong></p>
+          <p>Holstenstraße 98<br>24103 Kiel</p>
+          <p>Telefon: +49 431 988-1200</p>
+          <p>E-Mail: <a href="mailto:mail@datenschutzzentrum.de">mail@datenschutzzentrum.de</a></p>
+          <p>Website: <a href="https://www.datenschutzzentrum.de" target="_blank" rel="noopener noreferrer">www.datenschutzzentrum.de</a></p>
+        </div>
+        <p>Das Beschwerderecht lässt andere verwaltungsrechtliche oder gerichtliche Rechtsbehelfe unberührt.</p>
+      </div>
+
+    </div>
+  </div>
 </div>
 
 <footer class="footer">
-<div class="container footer-inner">
-<div class="footer-logo"><i class="fas fa-cube" style="color:var(--gold)"></i> Lunavo Media</div>
-<div class="footer-links">
-<a href="index.html">Startseite</a>
-<a href="impressum.html">Impressum</a>
-<a href="datenschutz.html">Datenschutz</a>
-</div>
-<span class="footer-copy">&copy; 2026 Lunavo Media. Alle Rechte vorbehalten.</span>
-</div>
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <img src="logo.png" alt="Lunavo Media" onerror="this.style.display='none'">
+      <span>Lunavo Media</span>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Startseite</a>
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html" aria-current="page">Datenschutz</a>
+    </div>
+    <span class="footer-copy">&copy; 2026 Lunavo Media. Alle Rechte vorbehalten.</span>
+  </div>
 </footer>
+
 </body>
 </html>
