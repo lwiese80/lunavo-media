@@ -413,6 +413,20 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: var(--
   .footer-links { justify-content: center; }
 }
 
+/* ─── PORTFOLIO ─── */
+.portfolio-section { padding: 100px 0; background: var(--off-white); }
+.portfolio-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 60px; }
+.tour-card { background: var(--white); border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--gray-200); transition: var(--transition); }
+.tour-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); border-color: var(--gold); }
+.tour-embed { position: relative; width: 100%; aspect-ratio: 16/10; background: var(--navy); }
+.tour-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+.tour-info { padding: 20px 24px; }
+.tour-title { font-weight: 700; color: var(--navy); font-size: 0.95rem; margin-bottom: 4px; }
+.tour-meta { color: var(--gray-400); font-size: 0.8rem; display: flex; align-items: center; gap: 8px; }
+.tour-meta::before { content: '📍'; font-size: 0.75rem; }
+.tour-tag { display: inline-block; background: rgba(212,185,106,0.12); color: var(--gold-dark); font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 100px; margin-top: 10px; }
+@media (max-width: 768px) { .portfolio-grid { grid-template-columns: 1fr; } }
+
 /* ─── SECTION HEADER CENTER ─── */
 .section-header { margin-bottom: 0; }
 .section-header.center { text-align: center; }
@@ -430,6 +444,7 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: var(--
         <span>Lunavo Media</span>
       </a>
       <ul class="nav-links">
+        <li><a href="#portfolio">Touren</a></li>
         <li><a href="#leistungen">Leistungen</a></li>
         <li><a href="#prozess">So läuft's ab</a></li>
         <li><a href="#preise">Preise</a></li>
@@ -446,6 +461,7 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: var(--
 <!-- MOBILE MENU -->
 <div class="mobile-menu">
   <button class="mobile-close" onclick="document.querySelector('.mobile-menu').classList.remove('open')">&times;</button>
+  <a href="#portfolio" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Touren</a>
   <a href="#leistungen" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Leistungen</a>
   <a href="#prozess" onclick="document.querySelector('.mobile-menu').classList.remove('open')">So läuft's ab</a>
   <a href="#preise" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Preise</a>
@@ -468,7 +484,7 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: var(--
         </p>
         <div class="hero-actions fade-in fade-in-delay-3">
           <a href="#kontakt" class="btn-primary">Kostenlos beraten lassen</a>
-          <a href="#preise" class="btn-ghost">Preise ansehen →</a>
+          <a href="#portfolio" class="btn-ghost">Touren ansehen →</a>
         </div>
       </div>
       <div class="hero-visual fade-in fade-in-delay-2">
@@ -477,9 +493,9 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: var(--
             <div class="hero-card-dot"></div>
             <span class="hero-card-title">LIVE VORSCHAU</span>
           </div>
-          <div class="hero-tour-preview">
+          <a href="#portfolio" class="hero-tour-preview" style="text-decoration:none;display:block;">
             <div class="play-btn"></div>
-          </div>
+          </a>
           <div class="tour-label">Matterport 3D-Tour · Rendsburger Weg, Kiel</div>
           <div class="hero-stats">
             <div class="hero-stat-item">
@@ -537,6 +553,39 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: var(--
       <div class="stat-card fade-in">
         <div class="stat-number">∞</div>
         <div class="stat-description">unbegrenzte Nutzung — einmal zahlen, für immer verfügbar</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio-section" id="portfolio">
+  <div class="container">
+    <div class="section-header center fade-in">
+      <div class="section-label">Referenzen</div>
+      <h2 class="section-title">Echte Touren. Echte Qualität.</h2>
+      <p class="section-sub">Navigieren Sie selbst durch die Räume — genau so wie Ihre zukünftigen Käufer es erleben werden.</p>
+    </div>
+    <div class="portfolio-grid">
+      <div class="tour-card fade-in fade-in-delay-1">
+        <div class="tour-embed">
+          <iframe src="https://my.matterport.com/show/?m=2TPJdh4qmGJ&play=1&qs=1" allowfullscreen allow="xr-spatial-tracking"></iframe>
+        </div>
+        <div class="tour-info">
+          <div class="tour-title">Wohnobjekt — Schleswig-Holstein</div>
+          <div class="tour-meta">Kiel &amp; Umgebung</div>
+          <span class="tour-tag">360° Matterport Tour</span>
+        </div>
+      </div>
+      <div class="tour-card fade-in fade-in-delay-2">
+        <div class="tour-embed">
+          <iframe src="https://my.matterport.com/show/?m=89vMFQ7CJJL&play=1&qs=1" allowfullscreen allow="xr-spatial-tracking"></iframe>
+        </div>
+        <div class="tour-info">
+          <div class="tour-title">Wohnobjekt — Schleswig-Holstein</div>
+          <div class="tour-meta">Kiel &amp; Umgebung</div>
+          <span class="tour-tag">360° Matterport Tour</span>
+        </div>
       </div>
     </div>
   </div>
