@@ -811,24 +811,24 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: var(--
         <div class="form-row">
           <div class="form-group">
             <label class="form-label">Vorname</label>
-            <input type="text" class="form-input" placeholder="Max" required>
+            <input type="text" name="vorname" class="form-input" placeholder="Max" required>
           </div>
           <div class="form-group">
             <label class="form-label">Nachname</label>
-            <input type="text" class="form-input" placeholder="Mustermann" required>
+            <input type="text" name="nachname" class="form-input" placeholder="Mustermann" required>
           </div>
         </div>
         <div class="form-group">
           <label class="form-label">E-Mail</label>
-          <input type="email" class="form-input" placeholder="max@mustermann.de" required>
+          <input type="email" name="email" class="form-input" placeholder="max@mustermann.de" required>
         </div>
         <div class="form-group">
           <label class="form-label">Telefon (optional)</label>
-          <input type="tel" class="form-input" placeholder="+49 ...">
+          <input type="tel" name="telefon" class="form-input" placeholder="+49 ...">
         </div>
         <div class="form-group">
           <label class="form-label">Nachricht</label>
-          <textarea class="form-textarea" placeholder="Ich interessiere mich für eine 360°-Tour für mein Objekt in ..." required></textarea>
+          <textarea name="nachricht" class="form-textarea" placeholder="Ich interessiere mich für eine 360°-Tour für mein Objekt in ..." required></textarea>
         </div>
         <p class="form-note">Mit dem Absenden stimmen Sie der Verarbeitung Ihrer Daten gemäß unserer <a href="datenschutz.html" style="color:var(--gold)">Datenschutzerklärung</a> zu.</p>
         <button type="submit" class="form-submit">Anfrage absenden →</button>
@@ -873,18 +873,35 @@ function handleFormSubmit(e) {
   const btn = e.target.querySelector('.form-submit');
   const form = e.target;
   const data = new FormData(form);
+
+  const vorname  = data.get('vorname')  || '';
+  const nachname = data.get('nachname') || '';
+  const email    = data.get('email')    || '';
+  const telefon  = data.get('telefon')  || 'nicht angegeben';
+  const nachricht= data.get('nachricht')|| '';
+
   btn.textContent = 'Wird gesendet...';
   btn.disabled = true;
-  setTimeout(() => {
-    btn.textContent = '✓ Nachricht gesendet!';
+
+  const subject = encodeURIComponent('Anfrage von ' + vorname + ' ' + nachname + ' – lunavo-media.de');
+  const body = encodeURIComponent(
+    'Name: ' + vorname + ' ' + nachname + '\n' +
+    'E-Mail: ' + email + '\n' +
+    'Telefon: ' + telefon + '\n\n' +
+    'Nachricht:\n' + nachricht
+  );
+
+  setTimeout(function() {
+    window.location.href = 'mailto:luca.wiese@lunavo-media.de?subject=' + subject + '&body=' + body;
+    btn.textContent = '✓ E-Mail-Client geöffnet!';
     btn.style.background = '#22c05d';
     form.reset();
-    setTimeout(() => {
+    setTimeout(function() {
       btn.textContent = 'Anfrage absenden →';
       btn.style.background = '';
       btn.disabled = false;
-    }, 3000);
-  }, 800);
+    }, 4000);
+  }, 600);
 }
 
 // Lazy-load Matterport iframes on click (facade pattern)
