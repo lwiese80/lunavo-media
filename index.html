@@ -807,7 +807,8 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: var(--
           <span>💬</span> WhatsApp-Nachricht senden
         </a>
       </div>
-      <form class="contact-form fade-in fade-in-delay-2" onsubmit="handleFormSubmit(event)">
+      <form name="contact" class="contact-form fade-in fade-in-delay-2" method="POST" data-netlify="true" onsubmit="handleFormSubmit(event)">
+        <input type="hidden" name="form-name" value="contact">
         <div class="form-row">
           <div class="form-group">
             <label class="form-label">Vorname</label>
@@ -872,36 +873,34 @@ function handleFormSubmit(e) {
   e.preventDefault();
   const btn = e.target.querySelector('.form-submit');
   const form = e.target;
-  const data = new FormData(form);
-
-  const vorname  = data.get('vorname')  || '';
-  const nachname = data.get('nachname') || '';
-  const email    = data.get('email')    || '';
-  const telefon  = data.get('telefon')  || 'nicht angegeben';
-  const nachricht= data.get('nachricht')|| '';
 
   btn.textContent = 'Wird gesendet...';
   btn.disabled = true;
 
-  const subject = encodeURIComponent('Anfrage von ' + vorname + ' ' + nachname + ' – lunavo-media.de');
-  const body = encodeURIComponent(
-    'Name: ' + vorname + ' ' + nachname + '\n' +
-    'E-Mail: ' + email + '\n' +
-    'Telefon: ' + telefon + '\n\n' +
-    'Nachricht:\n' + nachricht
-  );
-
-  setTimeout(function() {
-    window.location.href = 'mailto:luca.wiese@lunavo-media.de?subject=' + subject + '&body=' + body;
-    btn.textContent = '✓ E-Mail-Client geöffnet!';
-    btn.style.background = '#22c05d';
-    form.reset();
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(new FormData(form)).toString()
+  })
+  .then(function(res) {
+    if (res.ok) {
+      btn.textContent = '✓ Nachricht gesendet!';
+      btn.style.background = '#22c05d';
+      form.reset();
+    } else {
+      throw new Error('failed');
+    }
     setTimeout(function() {
       btn.textContent = 'Anfrage absenden →';
       btn.style.background = '';
       btn.disabled = false;
     }, 4000);
-  }, 600);
+  })
+  .catch(function() {
+    btn.textContent = 'Fehler – bitte erneut versuchen';
+    btn.style.background = '#e53e3e';
+    btn.disabled = false;
+  });
 }
 
 // Lazy-load Matterport iframes on click (facade pattern)
