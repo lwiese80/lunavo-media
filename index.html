@@ -418,8 +418,14 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: var(--
 .portfolio-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 60px; }
 .tour-card { background: var(--white); border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--gray-200); transition: var(--transition); }
 .tour-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); border-color: var(--gold); }
-.tour-embed { position: relative; width: 100%; aspect-ratio: 16/10; background: var(--navy); }
+.tour-embed { position: relative; width: 100%; aspect-ratio: 16/10; background: var(--navy); cursor: pointer; overflow: hidden; }
 .tour-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+.tour-facade { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+.tour-embed:hover .tour-facade { transform: scale(1.03); }
+.tour-play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 64px; height: 64px; background: rgba(255,255,255,0.95); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 24px rgba(0,0,0,0.3); transition: var(--transition); pointer-events: none; }
+.tour-embed:hover .tour-play-btn { background: var(--gold); transform: translate(-50%, -50%) scale(1.1); }
+.tour-play-btn svg { width: 24px; height: 24px; fill: var(--navy); margin-left: 4px; }
+.tour-facade-label { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); background: rgba(17,29,51,0.8); color: rgba(255,255,255,0.85); font-size: 0.72rem; font-weight: 500; padding: 4px 12px; border-radius: 100px; white-space: nowrap; pointer-events: none; }
 .tour-info { padding: 20px 24px; }
 .tour-title { font-weight: 700; color: var(--navy); font-size: 0.95rem; margin-bottom: 4px; }
 .tour-meta { color: var(--gray-400); font-size: 0.8rem; display: flex; align-items: center; gap: 8px; }
@@ -568,8 +574,10 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: var(--
     </div>
     <div class="portfolio-grid">
       <div class="tour-card fade-in fade-in-delay-1">
-        <div class="tour-embed">
-          <iframe src="https://my.matterport.com/show/?m=2TPJdh4qmGJ&play=1&qs=1" allowfullscreen allow="xr-spatial-tracking"></iframe>
+        <div class="tour-embed" data-src="https://my.matterport.com/show/?m=2TPJdh4qmGJ&play=1&qs=1" onclick="loadTour(this)" role="button" aria-label="Tour starten">
+          <img class="tour-facade" src="https://my.matterport.com/api/v1/player/models/2TPJdh4qmGJ/thumb?width=640&dpr=1" alt="360° Matterport Tour Vorschau" loading="lazy">
+          <div class="tour-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="tour-facade-label">▶ Tour starten</span>
         </div>
         <div class="tour-info">
           <div class="tour-title">Wohnobjekt — Schleswig-Holstein</div>
@@ -578,8 +586,10 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: var(--
         </div>
       </div>
       <div class="tour-card fade-in fade-in-delay-2">
-        <div class="tour-embed">
-          <iframe src="https://my.matterport.com/show/?m=89vMFQ7CJJL&play=1&qs=1" allowfullscreen allow="xr-spatial-tracking"></iframe>
+        <div class="tour-embed" data-src="https://my.matterport.com/show/?m=89vMFQ7CJJL&play=1&qs=1" onclick="loadTour(this)" role="button" aria-label="Tour starten">
+          <img class="tour-facade" src="https://my.matterport.com/api/v1/player/models/89vMFQ7CJJL/thumb?width=640&dpr=1" alt="360° Matterport Tour Vorschau" loading="lazy">
+          <div class="tour-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="tour-facade-label">▶ Tour starten</span>
         </div>
         <div class="tour-info">
           <div class="tour-title">Wohnobjekt — Schleswig-Holstein</div>
@@ -875,6 +885,21 @@ function handleFormSubmit(e) {
       btn.disabled = false;
     }, 3000);
   }, 800);
+}
+
+// Lazy-load Matterport iframes on click (facade pattern)
+function loadTour(el) {
+  const src = el.getAttribute('data-src');
+  if (!src) return;
+  el.removeAttribute('onclick');
+  el.style.cursor = 'default';
+  const iframe = document.createElement('iframe');
+  iframe.src = src;
+  iframe.allowFullscreen = true;
+  iframe.setAttribute('allow', 'xr-spatial-tracking');
+  iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none;';
+  el.innerHTML = '';
+  el.appendChild(iframe);
 }
 </script>
 
