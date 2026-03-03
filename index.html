@@ -52,7 +52,7 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: var(--
 
 /* ─── NAVIGATION ─── */
 .nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  position: fixed; top: 44px; left: 0; right: 0; z-index: 1000;
   padding: 20px 0;
   transition: var(--transition);
 }
@@ -441,6 +441,14 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: var(--
 </head>
 <body>
 
+<!-- URGENCY BANNER -->
+<div id="urgency-bar" style="background:#D4B96A;padding:11px 16px;text-align:center;position:relative;z-index:1001;">
+  <p style="margin:0;color:#111D33;font-size:0.85rem;font-weight:600;letter-spacing:0.2px;">
+    ⚡ Exklusiv: Noch <strong>3 kostenlose Touren</strong> für neue Partner in Schleswig-Holstein verfügbar —
+    <a href="#kontakt" style="color:#111D33;text-decoration:underline;font-weight:700;">Jetzt sichern →</a>
+  </p>
+</div>
+
 <!-- NAVIGATION -->
 <nav class="nav" id="nav">
   <div class="container">
@@ -693,10 +701,11 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: var(--
       </div>
 
       <div class="pricing-card featured fade-in fade-in-delay-2">
-        <div class="pricing-badge">Einstiegsangebot</div>
-        <div class="pricing-name">Erste Tour</div>
-        <div class="pricing-price"><sup>€</sup>200</div>
-        <div class="pricing-note">einmalig · für Neukunden</div>
+        <div class="pricing-badge">⚡ Nur noch 3 Plätze</div>
+        <div class="pricing-name">Erste Tour — Gratis</div>
+        <div class="pricing-price" style="text-decoration:line-through;opacity:0.4;font-size:1.8rem;"><sup>€</sup>200</div>
+        <div class="pricing-price" style="color:#D4B96A;margin-top:-8px;"><sup>€</sup>0</div>
+        <div class="pricing-note">für die ersten 3 neuen Partner in SH</div>
         <hr class="pricing-divider">
         <ul class="pricing-features">
           <li>360° Matterport-Aufnahme</li>
