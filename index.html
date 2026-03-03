@@ -815,8 +815,7 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: var(--
           <span>💬</span> WhatsApp-Nachricht senden
         </a>
       </div>
-      <form name="contact" class="contact-form fade-in fade-in-delay-2" method="POST" data-netlify="true" onsubmit="handleFormSubmit(event)">
-        <input type="hidden" name="form-name" value="contact">
+      <form name="contact" class="contact-form fade-in fade-in-delay-2" method="POST" onsubmit="handleFormSubmit(event)">
         <div class="form-row">
           <div class="form-group">
             <label class="form-label">Vorname</label>
@@ -876,39 +875,36 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-// Form submit
+// Form submit — mailto fallback (GitHub Pages doesn't support Netlify forms)
 function handleFormSubmit(e) {
   e.preventDefault();
-  const btn = e.target.querySelector('.form-submit');
   const form = e.target;
+  const btn = form.querySelector('.form-submit');
 
-  btn.textContent = 'Wird gesendet...';
-  btn.disabled = true;
+  const vorname  = form.querySelector('[name=vorname]').value.trim();
+  const nachname = form.querySelector('[name=nachname]').value.trim();
+  const email    = form.querySelector('[name=email]').value.trim();
+  const telefon  = form.querySelector('[name=telefon]').value.trim();
+  const nachricht = form.querySelector('[name=nachricht]').value.trim();
 
-  fetch('/', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams(new FormData(form)).toString()
-  })
-  .then(function(res) {
-    if (res.ok) {
-      btn.textContent = '✓ Nachricht gesendet!';
-      btn.style.background = '#22c05d';
-      form.reset();
-    } else {
-      throw new Error('failed');
-    }
-    setTimeout(function() {
-      btn.textContent = 'Anfrage absenden →';
-      btn.style.background = '';
-      btn.disabled = false;
-    }, 4000);
-  })
-  .catch(function() {
-    btn.textContent = 'Fehler – bitte erneut versuchen';
-    btn.style.background = '#e53e3e';
-    btn.disabled = false;
-  });
+  const subject = encodeURIComponent('Anfrage über lunavo-media.de');
+  const body = encodeURIComponent(
+    'Name: ' + vorname + ' ' + nachname + '\n' +
+    'E-Mail: ' + email + '\n' +
+    (telefon ? 'Telefon: ' + telefon + '\n' : '') +
+    '\nNachricht:\n' + nachricht
+  );
+
+  window.location.href = 'mailto:luca.wiese@lunavo-media.de?subject=' + subject + '&body=' + body;
+
+  btn.textContent = '✓ E-Mail-Programm geöffnet!';
+  btn.style.background = '#22c05d';
+  form.reset();
+
+  setTimeout(function() {
+    btn.textContent = 'Anfrage absenden →';
+    btn.style.background = '';
+  }, 5000);
 }
 
 // Lazy-load Matterport iframes on click (facade pattern)
