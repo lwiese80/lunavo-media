@@ -146,7 +146,7 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: var(--
 .hero-card-title { color: rgba(255,255,255,0.6); font-size: 0.8rem; letter-spacing: 0.5px; }
 .hero-tour-preview {
   background: var(--navy-mid); border-radius: 10px; aspect-ratio: 16/10;
-  display: flex; align-items: center; justify-content: center; margin-bottom: 20px; overflow: hidden;
+  display: block; margin-bottom: 20px; overflow: hidden;
   position: relative;
 }
 .hero-tour-preview::before {
@@ -506,9 +506,17 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: var(--
             <div class="hero-card-dot"></div>
             <span class="hero-card-title">LIVE VORSCHAU</span>
           </div>
-          <a href="#portfolio" class="hero-tour-preview" style="text-decoration:none;display:block;">
-            <div class="play-btn"></div>
-          </a>
+          <div class="hero-tour-preview" style="display:block;padding:0;">
+            <iframe
+              src="https://my.matterport.com/show/?m=2TPJdh4qmGJ&play=1&qs=1&brand=0"
+              width="100%" height="100%"
+              style="position:absolute;inset:0;width:100%;height:100%;border:none;border-radius:10px;"
+              allow="xr-spatial-tracking; fullscreen"
+              allowfullscreen
+              loading="lazy"
+              title="360° Matterport Tour – Rendsburger Weg, Kiel"
+            ></iframe>
+          </div>
           <div class="tour-label">Matterport 3D-Tour · Rendsburger Weg, Kiel</div>
           <div class="hero-stats">
             <div class="hero-stat-item">
